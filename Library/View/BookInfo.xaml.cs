@@ -1,6 +1,7 @@
 ﻿using Library.ViewModel;
 using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
@@ -9,14 +10,18 @@ namespace Library.View
     /// <summary>
     /// Логика взаимодействия для Book.xaml
     /// </summary>
-    public partial class Book : UserControl
+    public partial class BookInfo : UserControl
     {
-        public Book()
+        public BookInfo()
         {
             InitializeComponent();
-            DataContext = new BookViewModel();
+            DataContext = new BookInfoViewModel();
             bookImage.Source = new BitmapImage(
                 new Uri("pack://application:,,,/Resource/default_image.jpg", UriKind.RelativeOrAbsolute));
+            var ratingRange = new List<int>();
+            for (int i = 1; i <= 10; i++)
+                ratingRange.Add(i);
+            ratingComboBox.ItemsSource = ratingRange;
         }
 
         private void AddPhoto_Click(object sender, System.Windows.RoutedEventArgs e)

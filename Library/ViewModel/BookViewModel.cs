@@ -13,9 +13,9 @@ using System.Windows.Media.Imaging;
 
 namespace Library.ViewModel
 {
-    public class BookViewModel : ObservableObject
+    public class BookInfoViewModel : ObservableObject
     {
-        public BookViewModel()
+        public BookInfoViewModel()
         {
         }
     }

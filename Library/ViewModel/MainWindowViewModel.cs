@@ -63,7 +63,7 @@ namespace Library.ViewModel
         public static void CreateNewBook()
         {
             window.mainGrid.Children.Clear();
-            window.mainGrid.Children.Add(new View.Book());
+            window.mainGrid.Children.Add(new View.BookInfo());
         }
 
         private void openAllBooks()

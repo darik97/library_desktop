@@ -1,0 +1,45 @@
+﻿<Window x:Class="Library.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Library"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Library" Height="450" Width="625" WindowStartupLocation="CenterScreen" 
+        WindowState="Normal">
+    <Grid>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*" MaxWidth="200"></ColumnDefinition>
+            <ColumnDefinition Width="9*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Border BorderBrush="Black" BorderThickness="0 0 1 0">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="2">
+                        <Button Content="Все книги" Margin="2"
+                                Command="{Binding OpenAllBooksCommand}"/>
+                        <Button Content="Планы" Margin="2"
+                                Command="{Binding OpenBooksInPlanCommand}"/>
+                        <Button Content="Прочитано" Margin="2"
+                                Command="{Binding OpenBooksReadCommand}"/>
+                        <Button Content="Авторы" Margin="2"
+                                Command="{Binding OpenAuthorsCommand}"/>
+                        <Button Content="Жанры" Margin="2"
+                                Command="{Binding OpenGenresCommand}"/>
+                        <Button Content="Тема" Margin="2"
+                                Command="{Binding OpenPaletteCommand}"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+            
+        </Grid>
+
+        <Grid Grid.Column="1" x:Name="mainGrid">
+            
+        </Grid>
+        
+    </Grid>
+</Window>

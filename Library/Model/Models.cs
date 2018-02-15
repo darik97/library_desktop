@@ -1,4 +1,5 @@
 ﻿using Library.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 
@@ -37,6 +38,7 @@ namespace Library.Model
                 return Genres[0];
             }
         }
+        public string StringId { get { return Id.ToString(); } }
     }
 
     public class Author

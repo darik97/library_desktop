@@ -1,4 +1,5 @@
 ﻿using Library.Infrastructure;
+using Library.Model;
 using System.Linq;
 using System.Windows;
 
@@ -15,9 +16,11 @@ namespace Library.ViewModel
 
             OpenAllBooksCommand = new DelegateCommand(o => OpenAllBooks());
 
-            OpenBooksInPlanCommand = new DelegateCommand(o => openBooksWithState("Прочитано"));
+            OpenBooksInPlanCommand = new DelegateCommand(o => OpenAllBooks(Content.StatusPlans));
 
-            OpenBooksReadCommand = new DelegateCommand(o => openBooksWithState("Планы"));
+            OpenBooksReadCommand = new DelegateCommand(o => OpenAllBooks(Content.StatusRead));
+
+            OpenAuthorBooksCommand = new DelegateCommand(o => OpenAllBooks(Content.ByAuthor));
 
             OpenAuthorsCommand = new DelegateCommand(o => openAuthors());
 
@@ -36,6 +39,8 @@ namespace Library.ViewModel
         public DelegateCommand OpenBooksInPlanCommand { get; set; }
 
         public DelegateCommand OpenBooksReadCommand { get; set; }
+
+        public DelegateCommand OpenAuthorBooksCommand { get; set; }
 
         public DelegateCommand OpenAuthorsCommand { get; set; }
 
@@ -66,13 +71,13 @@ namespace Library.ViewModel
         public static void OpenBook(int id)
         {
             window.mainGrid.Children.Clear();
-            window.mainGrid.Children.Add(new View.BookInfo(true, id));
+            window.mainGrid.Children.Add(new View.BookInfo(false, id));
         }
 
-        public static void OpenAllBooks()
+        public static void OpenAllBooks(Content content = Content.All)
         {
             window.mainGrid.Children.Clear();
-            window.mainGrid.Children.Add(new View.BookCards());
+            window.mainGrid.Children.Add(new View.BookCards(content));
         }
 
         private void openGenres()
@@ -87,11 +92,11 @@ namespace Library.ViewModel
             window.mainGrid.Children.Add(new View.ListPage(true));
         }
 
-        private void openBooksWithState(string state)
-        {
-            window.mainGrid.Children.Clear();
-            window.mainGrid.Children.Add(new View.BookCards());
-        }
+        //private void openBooksWithState(Content content)
+        //{
+        //    window.mainGrid.Children.Clear();
+        //    window.mainGrid.Children.Add(new View.BookCards(content));
+        //}
 
         #endregion
     }

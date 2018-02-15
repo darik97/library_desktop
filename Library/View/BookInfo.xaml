@@ -78,7 +78,7 @@
                     <ComboBox BorderThickness="1" BorderBrush="Gray"
                               HorizontalContentAlignment="Center" 
                               ItemsSource="{Binding States}"
-                              SelectedItem="{Binding Status}"/>
+                              SelectedItem="{Binding BookInfo.Status}"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>

@@ -44,98 +44,56 @@
         </Border>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="10">
-            <StackPanel>
-                <!--<Grid Margin="10">
-                    <materialDesign:Card Width="220" Name="card" Height="75">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="4*"/>
-                            </Grid.ColumnDefinitions>
+            <ItemsControl ItemsSource="{Binding Books}" Name="cardList">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="10">
+                            <materialDesign:Card Width="220" Height="75">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="4*"/>
+                                    </Grid.ColumnDefinitions>
 
-                            <Image Name="img"
-                               Source="pack://application:,,,/Resource/default_image.jpg"/>
+                                    <Image Source="{Binding ImageBitmap}"/>
 
-                            <Grid Grid.Column="1" Margin="5">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="20"/>
-                                    <RowDefinition Height="20"/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
+                                    <Grid Grid.Column="1" Margin="5">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="20"/>
+                                            <RowDefinition Height="20"/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
 
-                                <TextBlock>
-                                            <Hyperlink Command="{Binding OpenBookCommand}">
+                                        <TextBlock>
+                                            <Hyperlink Click="Book_Click"
+                                                       NavigateUri="{Binding StringId}">
                                                 <TextBlock FontWeight="Bold"
                                                            TextWrapping="NoWrap"
-                                                           Text="название"/>
-                                            </Hyperlink>
-                                        </TextBlock>
-                                <TextBlock Grid.Row="1">
-                                            <Hyperlink Command="{Binding OpenBookCommand}">
-                                                <TextBlock TextWrapping="NoWrap"
-                                                           Text="автор"/>
-                                            </Hyperlink>
-                                        </TextBlock>
-                                <TextBlock Grid.Row="2" Text="Прочитано"
-                                           VerticalAlignment="Bottom"/>
-                            </Grid>
-                        </Grid>
-
-                    </materialDesign:Card>
-                </Grid>-->
-
-
-                <ItemsControl ItemsSource="{Binding Books}"
-                              Name="cardList">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Margin="10">
-                                <materialDesign:Card Width="220" Height="75">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="2*"/>
-                                            <ColumnDefinition Width="4*"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <Image Source="{Binding ImageBitmap}"/>
-
-                                        <Grid Grid.Column="1" Margin="5">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="20"/>
-                                                <RowDefinition Height="20"/>
-                                                <RowDefinition/>
-                                            </Grid.RowDefinitions>
-
-                                                <TextBlock>
-                                                    <Hyperlink Command="{Binding OpenBookCommand}">
-                                                        <TextBlock FontWeight="Bold"
-                                                                   TextWrapping="NoWrap"
-                                                                   Text="{Binding Title}"/>
-                                                    </Hyperlink>
-                                                </TextBlock>
-                                                <TextBlock Grid.Row="1">
-                                                    <Hyperlink Command="{Binding OpenBookCommand}">
-                                                        <TextBlock TextWrapping="NoWrap" Name="author"
-                                                                   DataContext="{Binding Path=Author}"
-                                                                   Text="{Binding Path=Name}"/>
-                                                    </Hyperlink>
-                                                </TextBlock>
-                                            <TextBlock Grid.Row="2"
-                                                       Text="{Binding Status}"
-                                                       VerticalAlignment="Bottom"/>
-                                        </Grid>
+                                                           Text="{Binding Title}"/>
+                                                </Hyperlink>
+                                            </TextBlock>
+                                        <TextBlock Grid.Row="1">
+                                            <Hyperlink Click="Author_Click"
+                                                       NavigateUri="{Binding Author.Name}">
+                                                <TextBlock TextWrapping="NoWrap" Name="author"
+                                                           Text="{Binding Path=Author.Name}"/>
+                                                </Hyperlink>
+                                            </TextBlock>
+                                        <TextBlock Grid.Row="2"
+                                                    Text="{Binding Status}"
+                                                    VerticalAlignment="Bottom"/>
                                     </Grid>
-                                </materialDesign:Card>
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
+                                </Grid>
+                            </materialDesign:Card>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </ScrollViewer>
     </DockPanel>
 </UserControl>

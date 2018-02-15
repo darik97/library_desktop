@@ -94,13 +94,13 @@
     <Compile Include="Model\DbInsertCommand.cs" />
     <Compile Include="Model\DbSelectCommand.cs" />
     <Compile Include="Model\Models.cs" />
-    <Compile Include="ViewModel\AuthorsPageViewModel.cs" />
+    <Compile Include="ViewModel\ListPageViewModel.cs" />
     <Compile Include="ViewModel\BookCardsViewModel.cs" />
-    <Compile Include="ViewModel\BookViewModel.cs" />
+    <Compile Include="ViewModel\BooInfoViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\PaletteViewModel.cs" />
-    <Compile Include="View\AuthorsPage.xaml.cs">
-      <DependentUpon>AuthorsPage.xaml</DependentUpon>
+    <Compile Include="View\ListPage.xaml.cs">
+      <DependentUpon>ListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\BookInfo.xaml.cs">
       <DependentUpon>BookInfo.xaml</DependentUpon>
@@ -126,7 +126,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\AuthorsPage.xaml">
+    <Page Include="View\ListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

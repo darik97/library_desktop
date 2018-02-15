@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Library.Helpers
+namespace Library.Infrastructure
 {
     public class ObservableObject : INotifyPropertyChanged
     {

@@ -34,7 +34,7 @@
             <Button Style="{StaticResource MaterialDesignFlatButton}"
                     Width="Auto" HorizontalAlignment="Right"
                     Margin="0 0 10 0"
-                    Content="СОХРАНИТЬ"
+                    Content="СОХРАНИТЬ" Click="AddBook_Click"
                     Foreground="{DynamicResource PrimaryHueMidForegroundBrush}"
                     FontWeight="ExtraLight"
                     FontSize="12"/>
@@ -50,10 +50,10 @@
                 <StackPanel Margin="5">
                     <Grid>
                         <Border BorderBrush="Gray" BorderThickness="1 1 1 1">
-                            <Image Name="bookImage"
-                                   Source="{Binding Image}"/>
+                            <Image Name="bookImage" 
+                                   Source="{Binding Path=Image}"/>
                         </Border>
-                        <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
                                 Height="35" Width="35" Click="AddPhoto_Click"
                                 VerticalAlignment="Bottom"
                                 HorizontalAlignment="Right"
@@ -61,10 +61,24 @@
                             <materialDesign:PackIcon Kind="Plus" Height="24" Width="24" />
                         </Button>
                     </Grid>
-                    <ComboBox>Статус</ComboBox>
-                    <ComboBox Name="ratingComboBox"
-                              BorderThickness="1"
-                              Text="Оценка" />
+                    <ComboBox BorderThickness="1" BorderBrush="Gray"
+                              HorizontalContentAlignment="Center" 
+                              ItemsSource="{Binding States}"
+                              SelectedItem="{Binding Status}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Оценка"
+                                   VerticalAlignment="Center"
+                                   Margin="0 0 10 0"/>
+                        <ComboBox Name="ratingComboBox" Grid.Column="1"
+                                  BorderThickness="1" BorderBrush="Gray"
+                                  HorizontalContentAlignment="Center"
+                                  ItemsSource="{Binding RatingRange}"/>
+                    </Grid>
+
 
                 </StackPanel>
 
@@ -106,13 +120,25 @@
                                VerticalAlignment="Center" HorizontalAlignment="Left"
                                Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
 
-                    <TextBox Grid.Column="1" Grid.Row="0" TextWrapping="Wrap"/>
-                    <TextBox Grid.Column="1" Grid.Row="1" TextWrapping="Wrap"/>
-                    <TextBox Grid.Column="1" Grid.Row="2" TextWrapping="Wrap"/>
-                    <TextBox Grid.Column="1" Grid.Row="3" TextWrapping="Wrap"/>
-                    <TextBox Grid.Column="1" Grid.Row="4" TextWrapping="Wrap"
+                    <TextBox Name="tbTitle" DataContext="{Binding Path=BookInfo}" Text="{Binding Path=Title}"
+                             Grid.Column="1" Grid.Row="0" TextWrapping="Wrap"
+                             BorderThickness="0 0 0 1" BorderBrush="Gray"/>
+                    <TextBox Name="tbAuthor"
+                             Grid.Column="1" Grid.Row="1" TextWrapping="Wrap"
+                             BorderThickness="0 0 0 1" BorderBrush="Gray"/>
+                    <TextBox Name="tbSeries"
+                             Grid.Column="1" Grid.Row="2" TextWrapping="Wrap"
+                             BorderThickness="0 0 0 1" BorderBrush="Gray"/>
+                    <TextBox Name="tbGenre"
+                             Grid.Column="1" Grid.Row="3" TextWrapping="Wrap"
+                             BorderThickness="0 0 0 1" BorderBrush="Gray"/>
+                    <TextBox Name="tbComment"
+                             Grid.Column="1" Grid.Row="4" TextWrapping="Wrap"
+                             BorderThickness="0 0 0 1" BorderBrush="Gray"
                              AcceptsReturn="True"/>
-                    <TextBox Grid.Column="1" Grid.Row="5"/>
+                    <TextBox Name="tbLink"
+                             Grid.Column="1" Grid.Row="5"
+                             BorderThickness="0 0 0 1" BorderBrush="Gray"/>
 
                 </Grid>
             </Grid>

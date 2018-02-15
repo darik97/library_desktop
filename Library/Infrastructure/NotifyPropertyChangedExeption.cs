@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Library.Helpers
+namespace Library.Infrastructure
 {
     public static class NotifyPropertyChangedExeption
     {

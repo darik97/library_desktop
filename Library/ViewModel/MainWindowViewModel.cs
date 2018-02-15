@@ -1,4 +1,4 @@
-﻿using Library.Helpers;
+﻿using Library.Infrastructure;
 using System.Linq;
 using System.Windows;
 using System;
@@ -28,11 +28,8 @@ namespace Library.ViewModel
             OpenPaletteCommand = new DelegateCommand(o => openPalette());
 
             CreateNewBookCommand = new DelegateCommand(o => CreateNewBook());
-        }
 
-        internal static void OpenBook(int o)
-        {
-            throw new NotImplementedException();
+            OpenBookCommand = new DelegateCommand(o => OpenBook((int)o));
         }
 
         #region Command
@@ -50,6 +47,8 @@ namespace Library.ViewModel
 
         public DelegateCommand CreateNewBookCommand { get; set; }
 
+        public DelegateCommand OpenBookCommand { get; set; }
+
         #endregion
 
         #region Command implementation
@@ -63,7 +62,13 @@ namespace Library.ViewModel
         public static void CreateNewBook()
         {
             window.mainGrid.Children.Clear();
-            window.mainGrid.Children.Add(new View.BookInfo());
+            window.mainGrid.Children.Add(new View.BookInfo(false));
+        }
+
+        public static void OpenBook(int id)
+        {
+            window.mainGrid.Children.Clear();
+            window.mainGrid.Children.Add(new View.BookInfo(true, id));
         }
 
         private void openAllBooks()
@@ -75,13 +80,13 @@ namespace Library.ViewModel
         private void openGenres()
         {
             window.mainGrid.Children.Clear();
-            window.mainGrid.Children.Add(new View.BookCards());
+            window.mainGrid.Children.Add(new View.ListPage(false));
         }
 
         private void openAuthors()
         {
             window.mainGrid.Children.Clear();
-            window.mainGrid.Children.Add(new View.BookCards());
+            window.mainGrid.Children.Add(new View.ListPage(true));
         }
 
         private void openBooksWithState(string state)

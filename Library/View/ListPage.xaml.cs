@@ -20,12 +20,12 @@ namespace Library.View
     /// <summary>
     /// Логика взаимодействия для AuthorsPage.xaml
     /// </summary>
-    public partial class AuthorsPage : UserControl
+    public partial class ListPage : UserControl
     {
-        public AuthorsPage()
+        public ListPage(bool isAboutAuthor)
         {
             InitializeComponent();
-            DataContext = new AuthorsPageViewModel();
+            DataContext = new ListPageViewModel(isAboutAuthor);
         }
     }
 }

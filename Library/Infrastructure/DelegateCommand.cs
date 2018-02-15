@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Library.Helpers
+namespace Library.Infrastructure
 {
     public class DelegateCommand : ICommand
     {

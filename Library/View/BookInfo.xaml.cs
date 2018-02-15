@@ -1,4 +1,6 @@
-﻿using Library.ViewModel;
+﻿using Library.Infrastructure;
+using Library.Model;
+using Library.ViewModel;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -12,16 +14,11 @@ namespace Library.View
     /// </summary>
     public partial class BookInfo : UserControl
     {
-        public BookInfo()
+        public BookInfo(bool isExist, int id = -1)
         {
             InitializeComponent();
-            DataContext = new BookInfoViewModel();
-            bookImage.Source = new BitmapImage(
-                new Uri("pack://application:,,,/Resource/default_image.jpg", UriKind.RelativeOrAbsolute));
-            var ratingRange = new List<int>();
-            for (int i = 1; i <= 10; i++)
-                ratingRange.Add(i);
-            ratingComboBox.ItemsSource = ratingRange;
+            var book = new BookInfoViewModel(isExist, id);
+            DataContext = book;
         }
 
         private void AddPhoto_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -35,6 +32,11 @@ namespace Library.View
             {
                 bookImage.Source = new BitmapImage(new Uri(op.FileName));
             }
+        }
+
+        private void AddBook_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var newBook = new Book();
         }
     }
 }

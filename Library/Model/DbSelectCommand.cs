@@ -203,9 +203,15 @@ namespace Library.Model
 
         internal static List<string> GetStatesLike(string name)
         {
+            var condition = "WHERE States.Status LIKE '%" + name + "%'";
+            return GetStates(condition);
+        }
+
+        internal static List<string> GetStates(string condition = "")
+        {
             var query = @"SELECT States.Status, States.ID
-                        FROM States
-                        WHERE States.Status LIKE '%" + name + "%'";
+                        FROM States" + condition;
+                        
             var resultTable = DbConnection.Select(query);
             var states = new List<string>();
             if (resultTable.Rows.Count > 0)

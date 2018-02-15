@@ -4,17 +4,18 @@ namespace Library.Model
 {
     class DbInsertCommand
     {
+        //TODO: проверки на логичность, существование. exepcions
         public static void AddBook(Book book)
         {
-            if (IsBookExist(book.Title, book.Authors[0].Name))
+            if (IsBookWithTitleExist(book.Title))
                 return;
-            if (book.Genres.Count > 0)
+            if (book.Genres != null && book.Genres.Count > 0)
             {
                 foreach (var genre in book.Genres)
                     if (!IsGenreExist(genre.Name))
                         AddGenre(genre.Name);
             }
-            if (book.Authors.Count > 0)
+            if (book.Authors != null && book.Authors.Count > 0)
             {
                 foreach (var author in book.Authors)
                     if (!IsGenreExist(author.Name))
@@ -35,6 +36,14 @@ namespace Library.Model
                 values ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}')",
                 book.Title, book.Image, DbSelectCommand.GetSeriesLike(book.Series)[0],
                 DbSelectCommand.GetStatesLike(book.Status)[0], book.Rating, book.Comment, book.Link);
+        }
+
+        private static void insertBookShort(Book book)
+        {
+            var query = string.Format(
+                @"INSERT INTO Books ('Title', 'Image', 'Status')
+                values ('{0}', '{1}', '{2}')",
+                book.Title, book.Image, DbSelectCommand.GetStatesLike(book.Status)[0]);
         }
 
         public static void AddAuthor(string name)
@@ -116,6 +125,13 @@ namespace Library.Model
         public static bool IsBookExist(string title, string author)
         {
             if (DbSelectCommand.FindBook(title, author).Count > 0)
+                return true;
+            return false;
+        }
+
+        public static bool IsBookWithTitleExist(string title)
+        {
+            if (DbSelectCommand.FindBookWithTitle(title).Count > 0)
                 return true;
             return false;
         }

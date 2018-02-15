@@ -77,6 +77,12 @@ namespace Library.Model
             return GetBriefBooks(condition);
         }
 
+        public static List<Book> FindBookWithTitle(string title)
+        {
+            var condition = string.Format(" and Books.Title LIKE '%{0}%'", title);
+            return GetBriefBooks(condition);
+        }
+
         public static List<Book> GetBooksWithTitle(string title)
         {
             var condition = string.Format(" and Books.Title LIKE '%{0}%'", title);
@@ -204,10 +210,10 @@ namespace Library.Model
         internal static List<string> GetStatesLike(string name)
         {
             var condition = "WHERE States.Status LIKE '%" + name + "%'";
-            return GetStates(condition);
+            return GetStates(condition, name);
         }
 
-        internal static List<string> GetStates(string condition = "")
+        internal static List<string> GetStates(string condition = "", string name = "")
         {
             var query = @"SELECT States.Status, States.ID
                         FROM States" + condition;
@@ -219,6 +225,11 @@ namespace Library.Model
                 {
                     states.Add((string)resultTable.Rows[i].ItemArray[0]);
                 }
+            else
+            {
+                DbInsertCommand.AddStatus(name);
+                return GetStatesLike(name);
+            }
             return states;
         }
     }

@@ -1,8 +1,6 @@
 ﻿using Library.Infrastructure;
 using System.Linq;
 using System.Windows;
-using System;
-using Library.Infrastructure;
 
 namespace Library.ViewModel
 {
@@ -13,9 +11,9 @@ namespace Library.ViewModel
         public MainWindowViewModel()
         {
             DbConnection.ConnectDb();
-            openAllBooks();
+            OpenAllBooks();
 
-            OpenAllBooksCommand = new DelegateCommand(o => openAllBooks());
+            OpenAllBooksCommand = new DelegateCommand(o => OpenAllBooks());
 
             OpenBooksInPlanCommand = new DelegateCommand(o => openBooksWithState("Прочитано"));
 
@@ -71,7 +69,7 @@ namespace Library.ViewModel
             window.mainGrid.Children.Add(new View.BookInfo(true, id));
         }
 
-        private void openAllBooks()
+        public static void OpenAllBooks()
         {
             window.mainGrid.Children.Clear();
             window.mainGrid.Children.Add(new View.BookCards());

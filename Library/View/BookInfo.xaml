@@ -31,13 +31,27 @@
                 Padding="10 0 0 0"
                 Margin="0 4 0 0"
                 Height="36">
-            <Button Style="{StaticResource MaterialDesignFlatButton}"
+            <DockPanel>
+                <Button Command="{Binding BackCommand}">
+                    <materialDesign:PackIcon Kind="ArrowLeft" Height="24" Width="24" />
+                </Button>
+
+                <Button Style="{StaticResource MaterialDesignFlatButton}"
                     Width="Auto" HorizontalAlignment="Right"
-                    Margin="0 0 10 0"
-                    Content="СОХРАНИТЬ" Click="AddBook_Click"
+                    Margin="0 0 10 0" DockPanel.Dock="Right"
+                    Content="СОХРАНИТЬ" Click="SaveBook_Click"
                     Foreground="{DynamicResource PrimaryHueMidForegroundBrush}"
                     FontWeight="ExtraLight"
                     FontSize="12"/>
+                
+                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                    Width="Auto" HorizontalAlignment="Right"
+                    Margin="0 0 10 0"
+                    Content="УДАЛИТЬ" Click="DeleteButton_Click"
+                    Foreground="{DynamicResource PrimaryHueMidForegroundBrush}"
+                    FontWeight="ExtraLight"
+                    FontSize="12"/>
+            </DockPanel>
         </Border>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="10">
@@ -50,8 +64,8 @@
                 <StackPanel Margin="5">
                     <Grid>
                         <Border BorderBrush="Gray" BorderThickness="1 1 1 1">
-                            <Image Name="bookImage" 
-                                   Source="{Binding Path=Image}"/>
+                            <Image Name="bookImage" DataContext="{Binding Image, Mode=TwoWay}"
+                                   Source="{Binding }"/>
                         </Border>
                         <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
                                 Height="35" Width="35" Click="AddPhoto_Click"

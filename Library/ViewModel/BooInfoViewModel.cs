@@ -2,6 +2,9 @@
 using Library.Model;
 using System;
 using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace Library.ViewModel
@@ -27,13 +30,56 @@ namespace Library.ViewModel
             {
                 BookInfo = DbSelectCommand.GetBook(id);
                 Image = ImageUtility.LoadImage(BookInfo.Image);
+                Status = BookInfo.Status;
                 if (Image != null)
                     return;
+            }
+            else
+            {
+                BookInfo = new Book()
+                {
+                    Title = "",
+                    Authors = new List<Author>() { new Author() },
+                    Series = "",
+                    Genres = new List<Genre>() { new Genre() },
+                    Comment = "",
+                    Link = "",
+                    Rating = 0, 
+                    Status = "Планы"
+                };
             }
             Image = new BitmapImage(new Uri(
                 "pack://application:,,,/Resource/default_image.jpg",
                 UriKind.RelativeOrAbsolute));
-            Status = "Планы";
+        }
+
+        public ICommand BackCommand
+        {
+            get
+            {
+                return new DelegateCommand(o => MainWindowViewModel.OpenAllBooks());
+            }
+        }
+
+        public void SaveBook(bool isImageChanged, ImageSource imageSource)
+        {
+            if (isImageChanged)
+                BookInfo.Image = ImageUtility.ImageSourceToBytes(
+                    new JpegBitmapEncoder(), imageSource);
+            if (IsExist)
+            {
+                MessageBox.Show("обновить книгу");
+                //DbDeleteUpdateCommand.UpdateBook(BookInfo);
+                return;
+            }
+            MessageBox.Show("создать книгу");
+            //DbInsertCommand.AddBook(BookInfo);
+        }
+
+        internal void Delete()
+        {
+            MessageBox.Show("удалить книгу");
+            //DbDeleteUpdateCommand.DeleteBook(BookInfo.Id);
         }
     }
 }

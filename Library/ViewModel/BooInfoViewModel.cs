@@ -12,7 +12,6 @@ namespace Library.ViewModel
     public class BookInfoViewModel : ObservableObject
     {
         public Book BookInfo { get; set; }
-        public BitmapImage Image { get; set; }
         public List<string> States { get; set; }
         public string Status { get; set; }
         public List<int> RatingRange { get; set; }
@@ -29,9 +28,8 @@ namespace Library.ViewModel
             if (IsExist)
             {
                 BookInfo = DbSelectCommand.GetBook(id);
-                Image = ImageUtility.LoadImage(BookInfo.Image);
                 Status = BookInfo.Status;
-                if (Image != null)
+                if (BookInfo.Image != null)
                     return;
             }
             else
@@ -48,9 +46,11 @@ namespace Library.ViewModel
                     Status = "Планы"
                 };
             }
-            Image = new BitmapImage(new Uri(
+            BookInfo.Image = ImageUtility.ImageSourceToBytes(
+                new JpegBitmapEncoder(), 
+                new BitmapImage(new Uri(
                 "pack://application:,,,/Resource/default_image.jpg",
-                UriKind.RelativeOrAbsolute));
+                UriKind.RelativeOrAbsolute)));
         }
 
         public ICommand BackCommand

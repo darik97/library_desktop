@@ -64,8 +64,8 @@
                 <StackPanel Margin="5">
                     <Grid>
                         <Border BorderBrush="Gray" BorderThickness="1 1 1 1">
-                            <Image Name="bookImage" DataContext="{Binding Image, Mode=TwoWay}"
-                                   Source="{Binding }"/>
+                            <Image Name="bookImage" DataContext="{Binding Path=BookInfo}" 
+                                   Source="{Binding ImageBitmap}"/>
                         </Border>
                         <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
                                 Height="35" Width="35" Click="AddPhoto_Click"
@@ -137,20 +137,20 @@
                     <TextBox Name="tbTitle" DataContext="{Binding Path=BookInfo}" Text="{Binding Path=Title}"
                              Grid.Column="1" Grid.Row="0" TextWrapping="Wrap"
                              BorderThickness="0 0 0 1" BorderBrush="Gray"/>
-                    <TextBox Name="tbAuthor"
+                    <TextBox Name="tbAuthor" DataContext="{Binding Path=BookInfo.Author}" Text="{Binding Path=Name}"
                              Grid.Column="1" Grid.Row="1" TextWrapping="Wrap"
                              BorderThickness="0 0 0 1" BorderBrush="Gray"/>
-                    <TextBox Name="tbSeries"
+                    <TextBox Name="tbSeries" DataContext="{Binding Path=BookInfo}" Text="{Binding Path=Series}"
                              Grid.Column="1" Grid.Row="2" TextWrapping="Wrap"
                              BorderThickness="0 0 0 1" BorderBrush="Gray"/>
-                    <TextBox Name="tbGenre"
+                    <TextBox Name="tbGenre" DataContext="{Binding Path=BookInfo.Genre}" Text="{Binding Path=Name}"
                              Grid.Column="1" Grid.Row="3" TextWrapping="Wrap"
                              BorderThickness="0 0 0 1" BorderBrush="Gray"/>
-                    <TextBox Name="tbComment"
+                    <TextBox Name="tbComment" DataContext="{Binding Path=BookInfo}" Text="{Binding Path=Comment}"
                              Grid.Column="1" Grid.Row="4" TextWrapping="Wrap"
                              BorderThickness="0 0 0 1" BorderBrush="Gray"
                              AcceptsReturn="True"/>
-                    <TextBox Name="tbLink"
+                    <TextBox Name="tbLink" DataContext="{Binding Path=BookInfo}" Text="{Binding Path=Link}"
                              Grid.Column="1" Grid.Row="5"
                              BorderThickness="0 0 0 1" BorderBrush="Gray"/>
 

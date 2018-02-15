@@ -44,54 +44,98 @@
         </Border>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="10">
-            <ItemsControl>
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <materialDesign:Card Width="200">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1*"/>
-                                    <ColumnDefinition Width="3*"/>
-                                </Grid.ColumnDefinitions>
+            <StackPanel>
+                <!--<Grid Margin="10">
+                    <materialDesign:Card Width="220" Name="card" Height="75">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="4*"/>
+                            </Grid.ColumnDefinitions>
 
-                                <Image Source="{Binding Image}"/>
+                            <Image Name="img"
+                               Source="pack://application:,,,/Resource/default_image.jpg"/>
 
-                                <Grid Grid.Column="1">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
+                            <Grid Grid.Column="1" Margin="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
 
-                                    <StackPanel Grid.Row="0">
-                                        <TextBlock>
+                                <TextBlock>
                                             <Hyperlink Command="{Binding OpenBookCommand}">
                                                 <TextBlock FontWeight="Bold"
-                                                           TextWrapping="Wrap"
-                                                           Text="{Binding Title}"/>
+                                                           TextWrapping="NoWrap"
+                                                           Text="название"/>
                                             </Hyperlink>
                                         </TextBlock>
-                                        <TextBlock>
+                                <TextBlock Grid.Row="1">
                                             <Hyperlink Command="{Binding OpenBookCommand}">
-                                                <TextBlock TextWrapping="Wrap"
-                                                           Text="{Binding Author}"/>
+                                                <TextBlock TextWrapping="NoWrap"
+                                                           Text="автор"/>
                                             </Hyperlink>
                                         </TextBlock>
-                                    </StackPanel>
-                                    <ComboBox ItemsSource="{Binding States}"
-                                              SelectedValue="{Binding Status}">
-                                    </ComboBox>
-                                </Grid>
+                                <TextBlock Grid.Row="2" Text="Прочитано"
+                                           VerticalAlignment="Bottom"/>
                             </Grid>
-                        </materialDesign:Card>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+                        </Grid>
 
+                    </materialDesign:Card>
+                </Grid>-->
+
+
+                <ItemsControl ItemsSource="{Binding Books}"
+                              Name="cardList">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="10">
+                                <materialDesign:Card Width="220" Height="75">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="4*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Image Source="{Binding ImageBitmap}"/>
+
+                                        <Grid Grid.Column="1" Margin="5">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="20"/>
+                                                <RowDefinition Height="20"/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+
+                                                <TextBlock>
+                                                    <Hyperlink Command="{Binding OpenBookCommand}">
+                                                        <TextBlock FontWeight="Bold"
+                                                                   TextWrapping="NoWrap"
+                                                                   Text="{Binding Title}"/>
+                                                    </Hyperlink>
+                                                </TextBlock>
+                                                <TextBlock Grid.Row="1">
+                                                    <Hyperlink Command="{Binding OpenBookCommand}">
+                                                        <TextBlock TextWrapping="NoWrap" Name="author"
+                                                                   DataContext="{Binding Path=Author}"
+                                                                   Text="{Binding Path=Name}"/>
+                                                    </Hyperlink>
+                                                </TextBlock>
+                                            <TextBlock Grid.Row="2"
+                                                       Text="{Binding Status}"
+                                                       VerticalAlignment="Bottom"/>
+                                        </Grid>
+                                    </Grid>
+                                </materialDesign:Card>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
     </DockPanel>
 </UserControl>

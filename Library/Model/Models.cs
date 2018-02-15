@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Library.Infrastructure;
+using System.Collections.Generic;
+using System.Windows.Media.Imaging;
 
 namespace Library.Model
 {
@@ -14,6 +16,27 @@ namespace Library.Model
         public string Status { get; set; }
         public List<Genre> Genres { get; set; }
         public List<Author> Authors { get; set; }
+        public BitmapImage ImageBitmap
+        {
+            get
+            {
+                return ImageUtility.LoadImage(Image);
+            }
+        }
+        public Author Author
+        {
+            get
+            {
+                return Authors[0];
+            }
+        }
+        public Genre Genre
+        {
+            get
+            {
+                return Genres[0];
+            }
+        }
     }
 
     public class Author
@@ -26,5 +49,14 @@ namespace Library.Model
     {
         public int Id { get; set; }
         public string Name { get; set; }
+    }
+
+    public enum Content
+    {
+        All,
+        ByAuthor,
+        Genre,
+        StatusRead,
+        StatusPlans
     }
 }

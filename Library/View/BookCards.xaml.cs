@@ -1,18 +1,10 @@
-﻿using Library.ViewModel;
+﻿using Library.Infrastructure;
+using Library.Model;
+using Library.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Library.View
 {
@@ -21,10 +13,11 @@ namespace Library.View
     /// </summary>
     public partial class BookCards : UserControl
     {
-        public BookCards()
+        public BookCards(Content content = Model.Content.All)
         {
             InitializeComponent();
-            DataContext = new BookCardsViewModel();
+            var context = new BookCardsViewModel(content);
+            DataContext = context;
         }
     }
 }
